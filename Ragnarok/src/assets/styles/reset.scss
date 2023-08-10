@@ -61,3 +61,14 @@ ul, li {
     width: 1420px;
     margin: 0 auto;
 }
+
+
+// Делаем "классы" для flex
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
