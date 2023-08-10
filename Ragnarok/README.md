@@ -13,3 +13,4 @@
     5.1 Create colors.scss where we'll store color vars;
     5.2 Create/copy reset.scss and import it to index.js
     5.3 Import colors to styles.scss
+    5.4 Create mixins.scss as we gonna have simillar elements (i.e buttons)
