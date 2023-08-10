@@ -8,3 +8,8 @@
 
 4. Index.js 
     4.1 Import styles
+
+5. Styles:
+    5.1 Create colors.scss where we'll store color vars;
+    5.2 Create/copy reset.scss and import it to index.js
+    5.3 Import colors to styles.scss
