@@ -31,6 +31,10 @@
         &:before {
             background: url(../images/bg.png) no-repeat center/cover;
         }
+
+        &-dual {
+            margin-top: 54px;
+        }
     }
 
     .header {
@@ -316,16 +320,91 @@
         }
     }
 
+    .dual {
+        column-gap: 5%;
+        margin-top: 20px;
+        transition: column-gap 0.5s;
 
-    @keyframes move {
+        &-description {
+            max-width: 410px;
+
+            p {
+                color: $sea;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 27px;
+                margin-bottom: 22px;
+
+                span {
+                    font-weight: 700;
+                }
+            }
+
+            &__info {
+                margin-top: 19px;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__price {
+                font-weight: 700;
+                font-size: 30px;
+                line-height: 36px;
+            }
+
+            &__button {
+                @include button($orange);
+                @include hoverOrange;
+                padding: 14px 19px;
+                font-weight: 500;
+            }
+        }
+
+        &-img {
+            max-width: 50%;
+            position: relative;
+
+            img {
+                max-width: fit-content;
+                animation: gravitation 1.5s linear infinite alternate;
+            }
+
+            // Свечение на заднем фоне
+            &::before {
+                display: block;
+                width: 194px;
+                height: 119px;
+                background: rgba(79, 96, 152, 0.8);
+                filter: blur(75px);
+                // Позиционирование по центру
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    @keyframes gravitation {
         0% {
-            opacity: 0;
-            transform: translateX(-400px);
+            transform: translateY(-15px);
         }
 
         100% {
-            opacity: 1;
-            transform: translateX(0px);
+            transform: translateY(0px);
         }
+    }
+}
+
+
+@keyframes move {
+    0% {
+        opacity: 0;
+        transform: translateX(-400px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
     }
 }
