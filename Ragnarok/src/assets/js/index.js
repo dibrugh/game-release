@@ -4,14 +4,19 @@ import "../styles/styles.scss";
 
 const header = document.querySelector('.header');
 const menuLink = document.querySelectorAll('.menu-link');
+const menuButton = document.querySelector('.header-menu__button');
+const video = document.getElementById('video');
+const videoButton = document.querySelector('.video-btn');
+
+
+let isPlay = false;
 
 // List of classes
 const classes = {
     opened: 'opened',
+    hidden: 'hidden',
 }
 // Burger-menu
-const menuButton = document.querySelector('.header-menu__button');
-
 const toggleMenu = () => {
     header.classList.toggle(classes.opened);
 }
@@ -67,5 +72,17 @@ const startTimer = (date) => {
     }, 1000);
     
 };
-
 startTimer("November 19, 2023 00:00:00");
+
+// Video
+const handleVideo = ( {target} ) => {
+    const info = target.parentElement;
+
+    isPlay = !isPlay;
+    // Если убираем курсор, то надпись пропадает
+    info.classList.toggle(classes.hidden, isPlay);
+    target.innerText = isPlay ? `Pause` : `Play`;
+    isPlay ? video.play() : video.pause();
+}
+videoButton.addEventListener('click', handleVideo);
+
