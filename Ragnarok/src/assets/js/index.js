@@ -7,6 +7,13 @@ const menuLink = document.querySelectorAll('.menu-link');
 const menuButton = document.querySelector('.header-menu__button');
 const video = document.getElementById('video');
 const videoButton = document.querySelector('.video-btn');
+const checkbox = document.querySelectorAll('.checkbox');
+
+const checkboxes = {
+    // Заранее присвоили data-аттрибут для чекбоксов в html
+    requirements: ["minimum", "recommended"],
+    versions: ["standard", "limited"],
+}
 
 
 let isPlay = false;
@@ -15,6 +22,7 @@ let isPlay = false;
 const classes = {
     opened: 'opened',
     hidden: 'hidden',
+    active: 'active',
 }
 // Burger-menu
 const toggleMenu = () => {
@@ -70,12 +78,12 @@ const startTimer = (date) => {
         }
         setTimerValues(getTimerValues(diff))
     }, 1000);
-    
+
 };
 startTimer("November 19, 2023 00:00:00");
 
 // Video
-const handleVideo = ( {target} ) => {
+const handleVideo = ({ target }) => {
     const info = target.parentElement;
 
     isPlay = !isPlay;
@@ -86,3 +94,28 @@ const handleVideo = ( {target} ) => {
 }
 videoButton.addEventListener('click', handleVideo);
 
+// Explore section
+const handleCheckbox = ({ currentTarget: { checked, name } }) => {
+    // Забираем класс active из объекта classes
+    const { active } = classes;
+    // В массиве 2 элемента, поэтому можно обращаться по индексу 1 или 0, т.е можно привести true/false у checked к числу
+    console.log(`${name}`, checked, Number(checked));
+    const value = checkboxes[`${name}`][Number(checked)];
+    
+
+    const list = document.getElementById(value);
+    // name = requirements или versions
+    const tabs = document.querySelectorAll(`[data-${name}]`);
+    // Для удаления классов у других элементов
+    const siblings = list.parentElement.children;
+    for (const item of siblings) item.classList.remove(active);
+
+    for (const tab of tabs) {
+        tab.classList.remove(active);
+        tab.dataset[name] === value && tab.classList.add(active);
+    }
+
+    list.classList.add(active)
+}
+
+checkbox.forEach(el => el.addEventListener('click', handleCheckbox))
