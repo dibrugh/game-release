@@ -4,6 +4,7 @@ import "../styles/styles.scss";
 
 import Swiper from 'swiper'
 import { Navigation } from 'swiper/modules';
+import { languages } from "./languages";
 Swiper.use([Navigation]);
 
 const header = document.querySelector('.header');
@@ -14,6 +15,7 @@ const videoButton = document.querySelector('.video-btn');
 const checkbox = document.querySelectorAll('.checkbox');
 const faqItem = document.querySelectorAll('.faq-item');
 const sections = document.querySelectorAll('.section');
+const language = document.querySelectorAll('.language');
 
 const checkboxes = {
     // Заранее присвоили data-аттрибут для чекбоксов в html
@@ -168,3 +170,26 @@ const handleScroll = () => {
 }
 
 window.addEventListener('scroll', handleScroll);
+
+// Toggle languages
+const setTexts = () => {
+    const lang = localStorage.getItem('lang') || 'en';
+    const content = languages[lang];
+
+    Object.entries(content).forEach(([key, value]) => {
+        const items = document.querySelectorAll(`[data-text="${key}"]`);
+        items.forEach(el => el.innerText = value);
+    });
+}
+
+const toggleLanguage = ({ target }) => {
+    const { lang } = target.dataset;
+
+    if (!lang) return;
+    // Запоминаем установленное значение
+    localStorage.setItem('lang', lang);
+    setTexts();
+}
+language.forEach(el => el.addEventListener('click', toggleLanguage));
+
+setTexts();
