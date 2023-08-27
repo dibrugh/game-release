@@ -1,6 +1,10 @@
+import "swiper/scss";
 import "../styles/reset.scss";
-import "../styles/mixins.scss";
 import "../styles/styles.scss";
+
+import Swiper from 'swiper'
+import { Navigation } from 'swiper/modules';
+Swiper.use([Navigation]);
 
 const header = document.querySelector('.header');
 const menuLink = document.querySelectorAll('.menu-link');
@@ -101,7 +105,7 @@ const handleCheckbox = ({ currentTarget: { checked, name } }) => {
     // В массиве 2 элемента, поэтому можно обращаться по индексу 1 или 0, т.е можно привести true/false у checked к числу
     console.log(`${name}`, checked, Number(checked));
     const value = checkboxes[`${name}`][Number(checked)];
-    
+
 
     const list = document.getElementById(value);
     // name = requirements или versions
@@ -119,3 +123,22 @@ const handleCheckbox = ({ currentTarget: { checked, name } }) => {
 }
 
 checkbox.forEach(el => el.addEventListener('click', handleCheckbox))
+
+
+// Swiper
+const initSlider = () => {
+    // Первым параметром css-селектор или html элемент, вторым настройки
+    new Swiper('.swiper', {
+        // бесконечный
+        loop: true,
+        slidesPerView: 2,
+        spaceBetween: 40,
+        initialSlide: 2,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+};
+
+initSlider();
