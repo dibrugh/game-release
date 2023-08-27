@@ -13,6 +13,7 @@ const video = document.getElementById('video');
 const videoButton = document.querySelector('.video-btn');
 const checkbox = document.querySelectorAll('.checkbox');
 const faqItem = document.querySelectorAll('.faq-item');
+const sections = document.querySelectorAll('.section');
 
 const checkboxes = {
     // Заранее присвоили data-аттрибут для чекбоксов в html
@@ -156,3 +157,14 @@ const handleFaqItem = ({ currentTarget: target }) => {
 }
 
 faqItem.forEach(el => el.addEventListener('click', handleFaqItem));
+
+// Отрисовка параллельно скролу
+const handleScroll = () => {
+    const { scrollY: y, innerHeight: h } = window;
+    sections.forEach((section) => {
+        // Если долистали до секции
+        if (y > section.offsetTop - h / 1.5) section.classList.remove(classes.hidden);
+    });
+}
+
+window.addEventListener('scroll', handleScroll);

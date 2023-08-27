@@ -2,6 +2,37 @@
 @import "./mixins.scss";
 
 .section {
+    &.hidden {
+        .editions {
+            &-item {
+                transition: transform 0;
+                transform: translateX(-4000px);
+            }
+        }
+
+        h2 {
+            transition: opacity 0;
+            opacity: 0;
+        }
+
+        .dual,
+        .explore-info {
+            transition: column-gap 0;
+            column-gap: 250%;
+        }
+
+        .video {
+            transition: transform 0s;
+            transform: scale(0);
+        }
+
+        .news,
+        .faq-item {
+            transition: transform 0;
+            transform: translateX(-200%);
+        }
+    }
+
     &-main {
         padding-top: 40px;
         // Будут элементы с абсолютным позиционированием, поэтому тут relative
@@ -280,6 +311,14 @@
         transition: transform 0.25s ease-in-out;
         transform: translateX(0);
 
+        // Вылет с задержкой
+        &:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+
+        &:last-child {
+            transition-delay: 0.5s;
+        }
 
         &__img {
             border-radius: 6px;
@@ -714,6 +753,15 @@
     &-item {
         transition: transform 0.4s;
         transform: translate(0);
+
+        // Вылет с задержкой
+        &:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+
+        &:last-child {
+            transition-delay: 0.5s;
+        }
 
         &__header {
             width: 100%;
