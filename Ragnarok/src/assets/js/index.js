@@ -12,6 +12,7 @@ const menuButton = document.querySelector('.header-menu__button');
 const video = document.getElementById('video');
 const videoButton = document.querySelector('.video-btn');
 const checkbox = document.querySelectorAll('.checkbox');
+const faqItem = document.querySelectorAll('.faq-item');
 
 const checkboxes = {
     // Заранее присвоили data-аттрибут для чекбоксов в html
@@ -142,3 +143,16 @@ const initSlider = () => {
 };
 
 initSlider();
+
+// FAQ
+const handleFaqItem = ({ currentTarget: target }) => {
+    target.classList.toggle(classes.opened);
+    // анимирование высоты
+    const isOpened = target.classList.contains(classes.opened);
+    const height = target.querySelector('p').clientHeight;
+    const content = target.querySelector('.faq-item__content');
+
+    content.style.height = `${isOpened ? height : 0}px`;
+}
+
+faqItem.forEach(el => el.addEventListener('click', handleFaqItem));
