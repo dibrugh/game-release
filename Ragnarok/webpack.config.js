@@ -23,6 +23,10 @@ module.exports = {
     module: {
         
         rules: [
+            {
+                test: /\.html$/,
+                use: 'html-loader'
+            },
             // Правила для loader-ов стилей (например, scss)
             {
                 // Регулярное выражение проверяет или sass, или scss, или css
@@ -32,7 +36,7 @@ module.exports = {
             // Правила для картинок
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: "asset/resource",
+                type: 'asset/resource',
             },
         ]
     },
