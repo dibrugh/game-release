@@ -16,6 +16,27 @@ const checkbox = document.querySelectorAll('.checkbox');
 const faqItem = document.querySelectorAll('.faq-item');
 const sections = document.querySelectorAll('.section');
 const language = document.querySelectorAll('.language');
+const buyButton = document.querySelectorAll('.buy-button');
+const modal = document.querySelector('.modal');
+const modalVersion = document.querySelector('.modal-version');
+const modalPrice = document.querySelector('.modal-total__price');
+const modalClose = document.querySelector('.modal-close');
+const overlay = document.querySelector('.overlay');
+
+const values = [
+    {
+        price: 19.99,
+        title: "Standard Edition",
+    },
+    {
+        price: 18.99,
+        title: "Standard Edition",
+    },
+    {
+        price: 29.99,
+        title: "Deluxe Edition",
+    },
+];
 
 const checkboxes = {
     // Заранее присвоили data-аттрибут для чекбоксов в html
@@ -193,3 +214,24 @@ const toggleLanguage = ({ target }) => {
 language.forEach(el => el.addEventListener('click', toggleLanguage));
 
 setTexts();
+
+// Modal window
+const handleBuyButton = ({ currentTarget: target }) => {
+    const { value } = target.dataset;
+
+    if (!value) return;
+
+    const { price, title } = values[value];
+    modalVersion.innerText = title;
+    modalPrice.innerText = `${price}$`;
+    modal.classList.add(classes.opened);
+    overlay.classList.add(classes.opened);
+};
+
+buyButton.forEach(el => el.addEventListener('click', handleBuyButton));
+
+const closeModal = () => {
+    modal.classList.remove(classes.opened);
+    overlay.classList.remove(classes.opened);
+}
+modalClose.addEventListener('click', closeModal);
